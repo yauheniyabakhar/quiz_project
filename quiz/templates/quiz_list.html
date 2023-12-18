@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+<h2>All quizzes on the topic of {{ topic.name }}</h2>
+<div class="row">
+{% for quiz in quizzes %}
+ <div class="col-md-4 d-flex align-items-stretch">
+       <div class="card mb-4 shadow-sm">
+          {% if quiz.image %}
+            <img src="{{ quiz.image.url }}" class="card-img-top" alt="...">
+          {% else %}
+            <img src="{% static 'images/no_image.jpg' %}" class="card-img-top">
+          {% endif %}
+          <div class="card-body">
+            <p class="card-text">
+                <a href="{% url 'quiz_info' quiz.id %}" class="quiz-button">{{ quiz.title }} by {{quiz.user}}</a>
+            </p>
+          </div>
+        </div>
+      </div>
+{% endfor %}
+</div>
+<div class="container pagination">
+    <nav aria-label="...">
+        {% if quizzes.has_other_pages %}
+            <ul class="pagination pagination-sm justify-content-end">
+                {% for i in quizzes.paginator.page_range %}
+                    {% if quizzes.number == i %}
+                        <li class="page-item active">
+                            <a class="page-button">{{ i }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-button" href="?page={{ i }}">{{ i }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </nav>
+</div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+<h2>Your Quiz Result</h2>
+<p>Score: {{ result.score }} out of {{ result.quiz.question_set.count }}</p>
+<p>Your start time: {{ result.start_time|date:"Y-m-d H:i:s" }}. Your end time: {{ result.end_time|date:"Y-m-d H:i:s" }}</p>
+<p>Time taken: {{result.time_taken}} </p>
+<a href="{% url 'quizzes' %}" class="quiz-button">Back to Quiz List</a>
+{% endblock %}

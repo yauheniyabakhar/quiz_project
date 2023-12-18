@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+<h2>Quizzes list</h2>
+  {% if quiz_list %}
+  <div class="row">
+    {% for quiz in quiz_list %}
+      <div class="col-md-4 d-flex align-items-stretch">
+         <div class="card mb-4 shadow-sm">
+          {% if quiz.image %}
+            <img src="{{ quiz.image.url }}" class="card-img-top" alt="...">
+          {% else %}
+            <img src="{% static 'images/no_image.jpg' %}" class="card-img-top">
+          {% endif %}
+          <div class="card-body">
+            <p class="card-text">
+                <a href="{% url 'quiz_info' quiz.id %}" class="quiz-button">{{ quiz.title }} by {{quiz.user}}</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="pagination mt-4">
+    <span class="step-links">
+      {% if page_obj.has_previous %}
+        <a href="?page=1" class="page-button">&laquo;First</a>
+        <a href="?page={{ page_obj.previous_page_number }}" class="page-button">Previous</a>
+      {% endif %}
+      <span class="current">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+      </span>
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="page-button">Next</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}" class="page-button">Last &raquo;</a>
+      {% endif %}
+    </span>
+  </div>
+{% endblock %}

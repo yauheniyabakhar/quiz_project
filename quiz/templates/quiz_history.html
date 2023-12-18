@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+<h2>Your Quiz Results History</h2>
+<br>
+<form method="get" class="search-form">
+    <input type="text" name="query" placeholder="Search by title" class="search-input">
+    <button type="submit" class="search-button">Search</button>
+</form>
+<br>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Quiz</th>
+      <th>Score</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Time Taken</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for result in user_results %}
+      <tr>
+        <td><a href="{% url 'quiz_info' result.quiz.id %}" class="quiz-link">{{ result.quiz.title }}</a></td>
+        <td>{{ result.score }} / {{ result.quiz.question_set.count }}</td>
+        <td>{{ result.start_time|date:"Y-m-d H:i:s" }}</td>
+        <td>{{ result.end_time|date:"Y-m-d H:i:s" }}</td>
+        <td>{{ result.time_taken }}</td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td colspan="5">No quiz results available.</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<br>
+<br>
+<br>
+<br>
+<div class="pagination">
+    <span class="step-links">
+      {% if user_results.has_previous %}
+        <a href="?page=1" class="page-button">&laquo; First</a>
+        <a href="?page={{ user_results.previous_page_number }}" class="page-button">Previous</a>
+      {% endif %}
+      <span class="current">
+        Page {{ user_results.number }} of {{ user_results.paginator.num_pages }}
+      </span>
+      {% if user_results.has_next %}
+        <a href="?page={{ user_results.next_page_number }}" class="page-button">Next</a>
+        <a href="?page={{ user_results.paginator.num_pages }}" class="page-button">Last &raquo;</a>
+      {% endif %}
+    </span>
+</div>
+{% endblock %}

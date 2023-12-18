@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-success" role="alert">
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+<h2>Your Created Quizzes</h2>
+<form method="GET" action="{% url 'quiz_by_user_list' %}" class="form-group">
+    <input type="text" name="query" placeholder="Search by title" class="search-input">
+    <button type="submit" class="search-button">Search</button>
+</form>
+<br>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Quizz Title</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for quiz in quiz_list %}
+      <tr>
+        <td><a href="{% url 'quiz_info' quiz.id %}" class="quiz-link">{{ quiz.title }}</a></td>
+        <td>
+          <a href="{% url 'update_quiz' quiz.id %}" class="to-do-button">Update Quiz Info</a>
+          <a href="{% url 'quiz_by_user_delete' quiz.id %}" class="to-do-button">Delete</a>
+        </td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td colspan="2">No quizzes created yet.</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<br>
+<a href="{% url 'create_quiz' %}">
+    <button class="quiz-button">Create New Quiz</button>
+</a>
+<br>
+<br>
+<br>
+  <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1" class="page-button">&laquo; First</a>
+            <a href="?page={{ page_obj.previous_page_number }}" class="page-button">Previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="page-button">Next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="page-button">Last &raquo;</a>
+        {% endif %}
+    </span>
+ </div>
+{% endblock %}

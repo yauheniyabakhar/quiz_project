@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<h2>Update Quiz</h2>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p|safe }}
+  <br>
+  <button type="submit" class="quiz-button">Update</button>
+</form>
+{% endblock %}

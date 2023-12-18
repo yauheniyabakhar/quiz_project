@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+<div class="container">
+    <div class="browse-section">
+        <h2>Choose Quiz by Topic</h2>
+        <div class="topics">
+            {% for topic in topics %}
+                <a href="{% url 'quiz_list' topic.id %}" class="topic-link">{{ topic.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="browse-section">
+        <h2>Take a Random Quiz</h2>
+        <div class="quizzes">
+            {% for quiz in quizzes %}
+                <a href="{% url 'quiz_info' quiz.id %}" class="quiz-link">{{ quiz.title }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<div>
+  <p>You have visited this page {{ num_visits }} {% if num_visits == 1%} time {% else %} times{% endif %}.</p>
+</div>
+{% endblock %}

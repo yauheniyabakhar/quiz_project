@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Search by "{{query}}" :</h1>
+  </br>
+  {% if quizzes %}
+  <div class="browse-section">
+    <div class="quizzes">
+      <ul>
+        {% for quiz in quizzes %}
+          <li>
+            <a href="{% url 'quiz_info' quiz.id %}" class="quiz-link">{{ quiz.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% else %}
+  <p>Oops. No quizzes :(</p>
+{% endif %}
+{% endblock %}

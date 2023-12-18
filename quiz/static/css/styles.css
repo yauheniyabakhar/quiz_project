@@ -1,0 +1,148 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+nav ul li {
+    margin-right: 20px;
+}
+nav ul li a {
+    color: white;
+}
+main {
+    padding: 20px;
+}
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+.container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+}
+.browse-section {
+    width: 30%;
+}
+.topics, .quizzes {
+    margin-top: 10px;
+}
+.topic-link, .quiz-link {
+    display: block;
+    padding: 10px;
+    margin-bottom: 5px;
+    background-color: #eee;
+    text-decoration: none;
+    color: #333;
+    border-radius: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.topic-link:hover, .quiz-link:hover {
+    background-color: #ddd;
+}
+.form-inline my-2 my-md-0 {
+    display: flex;
+    align-items: center;
+}
+
+.form-control {
+    padding: 8px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.btn.btn-outline-success {
+    padding: 8px 15px;
+    background-color: white;
+    color: black;
+    border: 1px solid #333;
+    border-radius: 5px;
+}
+.quiz-button {
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.quiz-button:active {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: white;
+}
+.search-form {
+    display: flex;
+    align-items: center;
+}
+.search-input {
+    padding: 8px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.search-button {
+    padding: 8px 15px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.search-button:active {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: white;
+}
+.card-img-top {
+    width: 400px;
+    height: 350px;
+    object-fit: cover;
+}
+.page-button {
+    padding: 10px 20px;
+    background-color: transparent;
+    color: black;
+    text-decoration: none;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+.page-button:hover {
+    background-color: black;
+    color: white;
+}
+.to-do-button {
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}

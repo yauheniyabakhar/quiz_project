@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+<div class="content-section">
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-success" role="alert">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  <h2>Create Choice</h2>
+  <p>Quiz: {{ quiz.title }}</p>
+  <p>Question: {{ question.text }}</p>
+  <form method="post">
+    {% csrf_token %}
+    {{ formset.management_form }}
+    {{ formset.non_form_errors }}
+    {% for form in formset %}
+      {{ form.as_p }}
+    {% endfor %}
+    <button type="submit" class="quiz-button" name="action" value="save_and_add">Save and Add Another Question</button>
+    <button type="submit" class="quiz-button" name="action" value="save_quiz">Save and Finish</button>
+  </form>
+</div>
+{% endblock %}

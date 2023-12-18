@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+  <h2>Create Question</h2>
+  <p>Quiz: {{ quiz.title }}</p>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="quiz-button">Save and Add Choices</button>
+  </form>
+{% endblock %}

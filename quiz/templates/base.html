@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>{% block title %}Quizzes Platform{% endblock %}</title>
+</head>
+
+<body>
+    <header>
+        <h1>Quizzes Platform</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'about' %}">About us</a></li>
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'quizzes' %}">Quiz list</a></li>
+                <li><a href="{% url 'create_quiz' %}">Create New Quiz</a></li>
+                <li>
+                    <form action="{% url 'search' %}" method="get" class="form-inline my-2 my-md-0">
+                        <input name="query" class="form-control" type="text" placeholder="Search by title or description">
+                        <button type="submit" class="btn btn-outline-success">Search</button>
+                    </form>
+                </li>
+
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'profile' %}">
+                        <svg class="bi bi-person" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 00.014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 00.022.004zm9.974.056v-.002.002zM8 7a2 2 0 100-4 2 2 0 000 4zm3-2a3 3 0 11-6 0 3 3 0 016 0z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        {{ user.get_username }}</a></li>
+                    <li><a href="{% url 'quiz_history'%}">My results</a></li>
+                    <li><a href="{% url 'quiz_by_user_list'%}">My quizzes</a></li>
+                    <li><a href="{% url 'logout'%}">Sign out</a></li>
+                {% else %}
+                    <li><a href="{% url 'login'%}?next={{request.path}}">Sign in</a></li>
+                    <li><a href="{% url 'register'%}">Register</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{% if message.tags == 'error' %}danger{% elif message.tags == 'info' %}success{% endif %}" role="alert">
+                {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <footer>
+        <p>&copy; 2023 Design by Y.B.</p>
+    </footer>
+</body>
+</html>

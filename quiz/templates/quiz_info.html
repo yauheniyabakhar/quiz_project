@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-success" role="alert">
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+<h2>{{ quiz.title }}</h2>
+<br>
+<p>{{ quiz.description | safe }}</p>
+<br>
+<form action="{% url 'quiz_detail' quiz.id %}" method="get">
+  <button type="submit" class="quiz-button">Start the Quiz</button>
+</form>
+ <br>
+  <h4>Comments:</h4>
+  {% if quiz.quizcomment_set.all %}
+    {% for comment in quiz.quizcomment_set.all %}
+      <hr>
+      <img class="rounded-circle" src="{{comment.user.profile.photo.url}}">
+      <strong>{{ comment.user }}</strong>, <em>{{ comment.date_created}}</em>
+      <p>{{ comment.content }}</p>
+    {% endfor %}
+  {% else %}
+    <p>There are no comments for this quiz yet. Be the first!</p>
+  {% endif %}
+
+  {% if user.is_authenticated %}
+  <div class="fieldWrapper">
+    <hr><br/>
+    <h4>Leave feedback:</h4>
+    <form action="" method="post">
+        {% csrf_token %}
+        <textarea name="content" rows="4" style="width: 100%; box-sizing: border-box;"></textarea></br>
+        <input type="submit" class="quiz-button" value="Save feedback">
+    </form>
+  </div>
+  {% endif %}
+{% endblock %}
