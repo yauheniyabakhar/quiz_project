@@ -24,7 +24,7 @@ Follow these steps to set up and run the Quizzes Platform on your local machine.
 
 1. Clone the repository:
 
-    git clone https://github.com/your-username/quizzes-platform.git
+    git clone https://github.com/yauheniyabakhar/quiz_project/tree/master
     cd quizzes-platform
 
 2. Install dependencies:
