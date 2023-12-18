@@ -25,21 +25,22 @@ Follow these steps to set up and run the Quizzes Platform on your local machine.
 1. Clone the repository:
 
     git clone https://github.com/yauheniyabakhar/quiz_project/tree/master
+   
     cd quizzes-platform
 
-2. Install dependencies:
+3. Install dependencies:
 
     pip install -r requirements.txt    
 
-3. Apply migrations:
+4. Apply migrations:
 
     python manage.py migrate    
 
-4. Run the development server:
+5. Run the development server:
 
     python manage.py runserver   
 
-5. Access the application at [http://localhost:8000](http://localhost:8000) in your web browser.
+6. Access the application at [http://localhost:8000](http://localhost:8000) in your web browser.
 
 ## Usage
 
